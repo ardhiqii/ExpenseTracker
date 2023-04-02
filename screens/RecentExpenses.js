@@ -10,6 +10,7 @@ function RecentExpenses() {
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState();
   const expensesCtx = useContext(ExpensesContext);
+
   useEffect(() => {
     async function getExpenses() {
       setIsFetching(true);
@@ -34,12 +35,15 @@ function RecentExpenses() {
   if (isFetching) {
     return <LoadingOverlay />;
   }
+  console.log("AAAAAAAAAAAAAA",expensesCtx.expenses);
+
   const recentExpenses = expensesCtx.expenses.filter((expense) => {
     const today = new Date();
     const date7DaysAgo = getDateMinusDays(today, 7);
 
-    return (expense.date = date7DaysAgo) && expense.date <= today;
+    return (expense.date >= date7DaysAgo) && expense.date <= today;
   });
+  console.log("BBBBBBBBBB",recentExpenses);
 
   return (
     <ExpensesOutput

@@ -33,8 +33,8 @@ function expensesReducer(state, action) {
 
 function ExpensesContextProvider({ children }) {
   const [expensesState, dispatch] = useReducer(expensesReducer, []);
-
   function setExpenses(expenses){
+    
     dispatch({type:'SET',payload:expenses})
   }
   function addExpense(expenseData) {
